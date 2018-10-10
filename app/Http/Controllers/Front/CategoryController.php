@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Shop\Categories\Repositories\CategoryRepository;
 use App\Shop\Categories\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -31,6 +32,7 @@ class CategoryController extends Controller
      */
     public function getCategory(string $slug)
     {
+
         $category = $this->categoryRepo->findCategoryBySlug($slug);
 
         $products = $category->products()->where('status', 1)->all();
