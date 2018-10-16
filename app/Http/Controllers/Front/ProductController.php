@@ -14,15 +14,15 @@ class ProductController extends Controller
     /**
      * @var ProductRepositoryInterface
      */
-    private $productRepo;
+    private $product;
 
     /**
      * ProductController constructor.
-     * @param ProductRepositoryInterface $productRepository
+     * @param Product $product
      */
-    public function __construct(ProductRepositoryInterface $productRepository)
+    public function __construct(Product $product)
     {
-        $this->productRepo = $productRepository;
+        $this->product = $product;
     }
 
     /**
@@ -53,10 +53,9 @@ class ProductController extends Controller
      */
     public function show(string $slug)
     {
-        $product = $this->productRepo->findProductBySlug(['slug' => $slug]);
+        $product = $this->product->findProductBySlug(['slug' => $slug]);
         $images = $product->images();
         $category = $product->categories()->first();
-
         return view('front.products.product', compact(
             'product',
             'images',

@@ -12,34 +12,29 @@ class CategoryController extends Controller
     /**
      * @var CategoryRepositoryInterface
      */
-    private $categoryRepo;
+    private $category;
 
     /**
      * CategoryController constructor.
      *
      * @param CategoryRepositoryInterface $categoryRepository
      */
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    public function __construct(Category $category)
     {
-        $this->categoryRepo = $categoryRepository;
+        $this->category = $category;
     }
 
     /**
-     * Find the category via the slug
-     *
      * @param string $slug
-     * @return \App\Shop\Categories\Category
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getCategory(string $slug)
     {
-
-        $category = $this->categoryRepo->findCategoryBySlug($slug);
-
+        $category = $this->category->where('slug', $slug);
         $products = $category->products()->where('status', 1)->all();
-
         return view('front.categories.category', [
             'category' => $category,
-            'products' => $products //$repo->paginateArrayResults($products, 20)
+            'products' => $products
         ]);
     }
 }

@@ -50,19 +50,18 @@ class HomeController extends Controller
 //        $cat1 = $this->categoryRepo->findCategoryById(1);
 //        $cat2 = $this->categoryRepo->findCategoryById(2);
 
-
 //        $product = $this->product->where('slug', 'Product_1')->first();
 //        dd($product->formatted);
-        $product = [
-            'name' => 'TOSHIBA',
-            'slug' => 'toshiba',
-            'category_id' => 2,
-            'price' => 200,
-            'description' => 'some ...',
-            'quantity' => 2,
-            'cover' => '',
-            'status' => false
-        ];
+//        $product = [
+//            'name' => 'TOSHIBA',
+//            'slug' => 'toshiba',
+//            'category_id' => 2,
+//            'price' => 200,
+//            'description' => 'some ...',
+//            'quantity' => 2,
+//            'cover' => '',
+//            'status' => false
+//        ];
 
 
 //
