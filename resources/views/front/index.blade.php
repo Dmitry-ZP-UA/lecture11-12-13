@@ -13,7 +13,7 @@
                 <div class="section-title b50">
                     <h2>{{ $category->name }}</h2>
                 </div>
-                @include('front.products.product-list', ['products' => null])
+                @include('front.products.product-list', ['products' => $category->products])
                 <div id="browse-all-btn">
                     <a class="btn btn-default browse-all-btn" href="{{ route('front.category.slug', $category->slug) }}"
                        role="button">browse all items

@@ -27,8 +27,11 @@ class HomeController extends Controller
      * @return View
      */
     public function index() {
-        $categories = $this->category->all();
-
-        return view('front.index', ['categories' => $categories]);
+        $categories = $this->category->with('products')->get();
+        return view('front.index',
+            [
+                'categories' => $categories,
+                'parentCategories' => $categories->where('parent_id', null)
+            ]);
     }
 }

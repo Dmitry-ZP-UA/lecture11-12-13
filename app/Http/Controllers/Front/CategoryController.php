@@ -32,14 +32,15 @@ class CategoryController extends Controller
     public function getCategory(string $slug)
     {
         $categories = $this->category->all();
+        $parentCategory = $categories->where('parent_id', null);
         $category = $categories->where('slug', $slug)->first();
 
-//        $products = $category->products()->where('status', 1)->all();
+        $products = $category->products()->available()->get();
 
         return view('front.categories.category', [
-            'categories' => $categories,
+            'categories' => $parentCategory,
             'category' => $category,
-            'products' => null //$products
+            'products' => $products
         ]);
     }
 }
