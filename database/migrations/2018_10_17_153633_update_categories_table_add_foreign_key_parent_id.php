@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateProductsTableAddForeingKeyCategpryId extends Migration
+class UpdateCategoriesTableAddForeignKeyParentId extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class UpdateProductsTableAddForeingKeyCategpryId extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table){
-            $table->foreign('category_id')->references('id')->on('categories');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->foreign('parent_id')->references('id')->on('categories');
         });
     }
 
@@ -25,8 +25,8 @@ class UpdateProductsTableAddForeingKeyCategpryId extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table){
-            $table->dropForeign('products_category_id_foreign');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropForeign('categories_parent_id_foreign');
         });
     }
 }

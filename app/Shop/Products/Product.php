@@ -2,6 +2,7 @@
 
 namespace App\Shop\Products;
 
+use App\Shop\Images\Image;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -79,6 +80,13 @@ class Product extends Model
         return "public/images/ProductCover" . $this->cover;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 
 
 }

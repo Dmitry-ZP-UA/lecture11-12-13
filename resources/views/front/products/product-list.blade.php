@@ -1,4 +1,4 @@
-@if(!empty($products) && !collect($products)->isEmpty())
+@if($products->count())
     <ul class="row text-center list-unstyled">
         @foreach($products as $product)
             <li class="col-md-3 col-sm-6 col-xs-12 product-list">
@@ -22,29 +22,21 @@
                                 </div>
                             </div>
                         </div>
-                        @if(isset($product->cover))
-                            <img src="{{ asset("storage/$product->cover") }}" alt="{{ $product->name }}" class="img-bordered img-responsive">
-                        @else
-                            <img src="https://placehold.it/263x330" alt="{{ $product->name }}" class="img-bordered img-responsive" />
-                        @endif
+                        {{--@if(isset($product->cover))--}}
+                            {{--<img src="{{ asset("storage/$product->cover") }}" alt="{{ $product->name }}" class="img-bordered img-responsive">--}}
+                        {{--@else--}}
+                            {{--<img src="https://placehold.it/263x330" alt="{{ $product->name }}" class="img-bordered img-responsive" />--}}
+                        {{--@endif--}}
                     </div>
 
                     <div class="product-text">
                         <h4>{{ $product->name }}</h4>
                         <p>
                             {{ config('cart.currency') }}
-                            {{--@if(!is_null($product->attributes->where('default', 1)->first()))--}}
-                                {{--@if(!is_null($product->attributes->where('default', 1)->first()->sale_price))--}}
-                                    {{--{{ number_format($product->attributes->where('default', 1)->first()->sale_price, 2) }}--}}
-                                    {{--<p class="text text-danger">Sale!</p>--}}
-                                {{--@else--}}
-                                    {{--{{ number_format($product->attributes->where('default', 1)->first()->price, 2) }}--}}
-                                {{--@endif--}}
-                            {{--@else--}}
-                                {{ number_format($product->price, 2) }}
-                            {{--@endif--}}
+                            {{ number_format($product->price, 2) }}
                         </p>
                     </div>
+
                     <!-- Modal -->
                     <div class="modal fade" id="myModal_{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
@@ -56,13 +48,6 @@
                 </div>
             </li>
         @endforeach
-        {{--@if($products instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator)--}}
-            {{--<div class="row">--}}
-                {{--<div class="col-md-12">--}}
-                    {{--<div class="pull-left">{{ $products->links() }}</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--@endif--}}
     </ul>
 @else
     <p class="alert alert-warning">No products yet.</p>

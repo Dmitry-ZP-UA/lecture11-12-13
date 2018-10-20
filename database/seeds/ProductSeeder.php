@@ -20,7 +20,6 @@ class ProductSeeder extends Seeder
                'description' => 'Description Product 1',
                'price' => 100,
                'status' => 1,
-               'cover' => 'product.png',
                'quantity' => 20
             ],
             [
@@ -30,7 +29,6 @@ class ProductSeeder extends Seeder
                 'description' => 'Description Product 2',
                 'price' => 150,
                 'status' => 1,
-                'cover' => 'product.png',
                 'quantity' => 200
             ],
             [
@@ -40,7 +38,6 @@ class ProductSeeder extends Seeder
                 'description' => 'Description Product 3',
                 'price' => 1200,
                 'status' => 1,
-                'cover' => 'product.png',
                 'quantity' => 202
             ],
             [
@@ -50,7 +47,6 @@ class ProductSeeder extends Seeder
                 'description' => 'Description Product 4',
                 'price' => 169,
                 'status' => 1,
-                'cover' => 'product.png',
                 'quantity' => 288
             ]
 

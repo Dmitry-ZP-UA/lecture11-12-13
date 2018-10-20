@@ -1,4 +1,4 @@
-<a href="{{ route('front.category.slug', $category->slug) }}">{{ $category->name }}</a>
+<a href="{{ route('front.category.slug', $category->slug) }}">{{ $category->formatted_name }}</a>
 @if($subs)
     <ul class="list-unstyled sidebar-category-sub">
     @foreach($subs as $sub)

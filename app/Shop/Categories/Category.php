@@ -2,16 +2,14 @@
 
 namespace App\Shop\Categories;
 
+use App\Shop\Images\Image;
+use App\Shop\Products\Product;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-//    protected $fillable = [
-//        'name',
-//        'slug',
-//        'description',
-//        'parent_id'
-//    ];
+
 
     protected $guarded = [
         'id',
@@ -52,6 +50,47 @@ class Category extends Model
     public function scopeAllParentCategories($query)
     {
         return $this->where('parent_id', null);
+    }
+
+    /**
+     * @param Builder $query
+     * @return mixed
+     */
+    public function scopeParent(Builder $query)
+    {
+        return $query->whereNull('parent_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parentCategory()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subCategories()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 
 }

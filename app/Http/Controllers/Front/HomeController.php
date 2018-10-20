@@ -4,31 +4,22 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Shop\Categories\Category;
-use App\Shop\Categories\Repositories\Interfaces\CategoryRepositoryInterface;
-use App\Shop\Products\Product;
-use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
     /**
-     * @var CategoryRepositoryInterface
+     * @var Category
      */
     private $category;
-
-    /**
-     * @var Product
-     */
-    private $product;
 
     /**
      * HomeController constructor.
      * @param Category $category
      */
-    public function __construct(Category $category, Product $product)
+    public function __construct(Category $category)
     {
         $this->category = $category;
-        $this->product = $product;
-        //$this->categoryRepo = $categoryRepository;
     }
 
     /**
@@ -36,41 +27,12 @@ class HomeController extends Controller
      */
     public function index() {
 
-//        $category = new Category();
-//        $category->name = 'New Category';
-//        $category->slug = "New slug";
-//        $category->description = "New description";
-//        $category->save();
+        dd($categories = $this->category->with(['images', 'subCategories'])->parent()->get());
 
-//        $category = $this->category->destroy(1);
-//
-//        dd($category);
+        return view('front.index', [
+            'categories' => $categories
+        ]);
 
 
-//        $cat1 = $this->categoryRepo->findCategoryById(1);
-//        $cat2 = $this->categoryRepo->findCategoryById(2);
-
-//        $product = $this->product->where('slug', 'Product_1')->first();
-//        dd($product->formatted);
-//        $product = [
-//            'name' => 'TOSHIBA',
-//            'slug' => 'toshiba',
-//            'category_id' => 2,
-//            'price' => 200,
-//            'description' => 'some ...',
-//            'quantity' => 2,
-//            'cover' => '',
-//            'status' => false
-//        ];
-
-
-//
-//        $productModel = $this->product->create($product);
-//        dd($productModel);
-
-        $productModel = $this->product->available()->get();
-        dd($productModel);
-
-        return view('front.index', compact('cat1', 'cat2'));
     }
 }

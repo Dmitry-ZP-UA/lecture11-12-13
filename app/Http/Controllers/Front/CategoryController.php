@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Shop\Categories\Repositories\CategoryRepository;
+use App\Shop\Categories\Category;
 use App\Shop\Categories\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -17,7 +16,7 @@ class CategoryController extends Controller
     /**
      * CategoryController constructor.
      *
-     * @param CategoryRepositoryInterface $categoryRepository
+     * @param Category $category
      */
     public function __construct(Category $category)
     {
@@ -30,11 +29,13 @@ class CategoryController extends Controller
      */
     public function getCategory(string $slug)
     {
-        $category = $this->category->where('slug', $slug);
-        $products = $category->products()->where('status', 1)->all();
+        $categories = $this->category->with(['products'])->get();
+        $parentCategories = $categories->where('parent_id', null);
+        $category = $categories->where('slug', $slug)->first();
+
         return view('front.categories.category', [
-            'category' => $category,
-            'products' => $products
+            'categories' => $parentCategories,
+            'category' => $category
         ]);
     }
 }

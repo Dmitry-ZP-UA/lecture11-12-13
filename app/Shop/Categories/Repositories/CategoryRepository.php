@@ -3,7 +3,7 @@
 namespace App\Shop\Categories\Repositories;
 
 use App\Repositories\BaseRepository;
-use App\Shop\Categories\Category;
+use App\Shop\Categories\Category2;
 use App\Shop\Categories\Exceptions\CategoryInvalidArgumentException;
 use App\Shop\Categories\Exceptions\CategoryNotFoundException;
 use App\Shop\Categories\Repositories\Interfaces\CategoryRepositoryInterface;
@@ -22,9 +22,9 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
     /**
      * CategoryRepository constructor.
-     * @param Category $category
+     * @param Category2 $category
      */
-    public function __construct(Category $category)
+    public function __construct(Category2 $category)
     {
         parent::__construct($category);
         $this->model = $category;
@@ -48,11 +48,11 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
      *
      * @param array $params
      *
-     * @return Category
+     * @return Category2
      * @throws CategoryInvalidArgumentException
      * @throws CategoryNotFoundException
      */
-    public function createCategory(array $params) : Category
+    public function createCategory(array $params) : Category2
     {
         try {
             $collection = collect($params);
@@ -66,7 +66,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
             $merge = $collection->merge(compact('slug', 'cover'));
 
-            $category = new Category($merge->all());
+            $category = new Category2($merge->all());
 
             if (isset($params['parent'])) {
                 $parent = $this->findCategoryById($params['parent']);
@@ -85,7 +85,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
      *
      * @param array $params
      *
-     * @return Category
+     * @return Category2
      * @throws CategoryNotFoundException
      */
     /*public function updateCategory(array $params) : Category
@@ -110,10 +110,10 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
     /**
      * @param int $id
-     * @return Category
+     * @return Category2
      * @throws CategoryNotFoundException
      */
-    public function findCategoryById(int $id) : Category
+    public function findCategoryById(int $id) : Category2
     {
         try {
             return $this->findOneOrFail($id);
@@ -190,10 +190,10 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
      *
      * @param string $slug
      *
-     * @return Category
+     * @return Category2
      * @throws CategoryNotFoundException
      */
-    public function findCategoryBySlug(string $slug) : Category
+    public function findCategoryBySlug(string $slug) : Category2
     {
         try {
             return $this->findOneByOrFail('slug', $slug);

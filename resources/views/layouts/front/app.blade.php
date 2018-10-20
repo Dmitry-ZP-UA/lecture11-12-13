@@ -37,7 +37,7 @@
                     <li id="cart" class="menubar-cart">
                         <a href="{{ route('cart.index') }}" title="View Cart" class="awemenu-icon menu-shopping-cart">
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            <span class="cart-number">{{ $cartCount }}</span>
+                            <span class="cart-number">{{ $cartCount ?? 0 }}</span>
                         </a>
                     </li>
                 </ul>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateImagesTableAddForeingKeyProductId extends Migration
+class UpdateProductsTableAddForeignKeyCategoryId extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class UpdateImagesTableAddForeingKeyProductId extends Migration
      */
     public function up()
     {
-        Schema::table('images', function (Blueprint $table){
-            $table->foreign('product_id')->references('id')->on('products');
+        Schema::table('products', function (Blueprint $table) {
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
@@ -25,8 +25,8 @@ class UpdateImagesTableAddForeingKeyProductId extends Migration
      */
     public function down()
     {
-        Schema::table('images', function (Blueprint $table){
-            $table->dropForeign('images_product_id_foreign');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropForeign('products_category_id_foreign');
         });
     }
 }
